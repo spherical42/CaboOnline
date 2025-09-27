@@ -1,0 +1,97 @@
+[gd_scene load_steps=2 format=3 uid="uid://bv2bx7m6rxjri"]
+
+[ext_resource type="Script" uid="uid://qomq0c3238kc" path="res://main/menus/login.gd" id="1_13yus"]
+
+[node name="Login" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_13yus")
+
+[node name="start" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = -84.0
+offset_right = 88.0
+offset_bottom = 84.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="login" type="Button" parent="start"]
+layout_mode = 2
+text = "online play"
+
+[node name="singleplayer" type="Button" parent="start"]
+layout_mode = 2
+text = "solo play"
+
+[node name="credentials" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="uname" type="TextEdit" parent="credentials"]
+layout_mode = 0
+offset_left = -112.0
+offset_top = -48.0
+offset_right = 112.0
+offset_bottom = -16.0
+placeholder_text = "USERNAME"
+
+[node name="pword" type="TextEdit" parent="credentials"]
+layout_mode = 0
+offset_left = -112.0
+offset_top = 16.0
+offset_right = 112.0
+offset_bottom = 48.0
+placeholder_text = "PASSWORD"
+
+[node name="confirm" type="Button" parent="credentials"]
+layout_mode = 0
+offset_left = -64.0
+offset_top = 80.0
+offset_right = 64.0
+offset_bottom = 112.0
+text = "login"
+
+[node name="back" type="Button" parent="credentials"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 80.0
+offset_right = 256.0
+offset_bottom = 112.0
+text = "back"
+
+[node name="errtext" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="connected" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "CONNECTED"
+
+[connection signal="button_up" from="start/login" to="." method="_on_login_button_up"]
+[connection signal="button_up" from="start/singleplayer" to="." method="_on_singleplayer_button_up"]
+[connection signal="button_up" from="credentials/confirm" to="." method="_on_confirm_button_up"]
+[connection signal="button_up" from="credentials/back" to="." method="_on_back_button_up"]

@@ -1,0 +1,8 @@
+socket:
+  server_key: bigboykey
+  port: 7350
+
+console:
+  port: 7351
+  username: cubic
+  password: ILOVECABO
