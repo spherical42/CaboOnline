@@ -12,5 +12,17 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_e0baf")
 
-[node name="playerhand" parent="." instance=ExtResource("2_fntey")]
+[node name="player" parent="." instance=ExtResource("2_fntey")]
 layout_mode = 1
+
+[node name="0" parent="." instance=ExtResource("2_fntey")]
+layout_mode = 1
+anchors_preset = 5
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_left = 256.0
+offset_top = 296.0
+offset_right = 768.0
+offset_bottom = 584.0
+grow_vertical = 1
+rotation = 3.1414676

@@ -44,17 +44,22 @@ func _ready():
 	for i in range(Connection.numbots):
 		hands[str(i)] = deal(Connection.gametype)
 	
-	for i in range(hands["player"].top.size()):
-		var curcard = card.instantiate()
-		curcard.val = hands["player"].top[i]
-		$playerhand/top.add_child(curcard)
-		
-	for i in range(hands["player"].bot.size()):
-		var curcard = card.instantiate()
-		curcard.val = hands["player"].bot[i]
-		curcard.up = true
-		$playerhand/bot.add_child(curcard)
 	
+	
+	for x in hands:
+		for i in range(hands[x].top.size()):
+			var curcard = card.instantiate()
+			curcard.val = hands[x].top[i]
+			get_node(str(x)+"/top").add_child(curcard)
+		
+		for i in range(hands[x].bot.size()):
+			var curcard = card.instantiate()
+			curcard.val = hands[x].bot[i]
+			get_node(str(x)+"/bot").add_child(curcard)
+	
+	for x in $player/bot.get_children():
+		x.up = true
+		
 
 func shuffle():
 	randomize()

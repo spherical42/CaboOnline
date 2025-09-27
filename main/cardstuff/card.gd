@@ -1,6 +1,9 @@
 extends PanelContainer
 var val : int
-var up = false
+var up := false : 
+	set(n): 
+		up = n
+		set_up()
 var pos = Vector2(0, 0)
 var ownerhand = ""
 
@@ -16,3 +19,6 @@ func _on_mouse_entered() -> void:
 
 func _on_mouse_exited() -> void:
 	pass # Replace with function body.
+
+func set_up():
+	$back.visible = !up
