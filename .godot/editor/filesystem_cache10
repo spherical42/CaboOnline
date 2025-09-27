@@ -1,5 +1,5 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1758973615
+::res://::1758995802
 icon.svg::CompressedTexture2D::3276027709778003777::1758642074::1758642077::1::::<><><>0<>0<>073c47b7808121167df4329b1c622291<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 README.md::TextFile::-1::1758642232::0::1::::<><><>0<>0<><>::
 ::res://addons/::1758642161
@@ -39,12 +39,16 @@ README.md::TextFile::-1::1758642161::0::1::::<><><>0<>0<><>::
 ::res://main/::1758925092
 ::res://main/autoload/::1758921203
 Connection.gd::GDScript::5758711997256897923::1758921203::0::1::::<>Node2D<><>0<>0<><>::
-::res://main/games/::1758642924
-::res://main/menus/::1758939958
+::res://main/games/::1758994347
+solo.gd::GDScript::3696507938300276548::1758994337::0::1::::<>Node2D<><>0<>0<><>::
+solo.tscn::PackedScene::6354415053601326389::1758994347::0::1::::<><><>0<>0<><>::uid://bswu7fg5shtoe::::res://main/games/solo.gd
+::res://main/menus/::1758994405
 login.gd::GDScript::1152681280863805290::1758920937::0::1::::<>Control<><>0<>0<><>::
-login.tscn::PackedScene::3916228090420962582::1758939958::0::1::::<><><>0<>0<><>::uid://qomq0c3238kc::::res://main/menus/login.gd
+login.tscn::PackedScene::3916228090420962582::1758973920::0::1::::<><><>0<>0<><>::uid://qomq0c3238kc::::res://main/menus/login.gd
+onlinemenu.gd::GDScript::2856324227234665464::1758994405::0::1::::<>Node2D<><>0<>0<><>::
+onlinemenu.tscn::PackedScene::4335070734772972097::1758994145::0::1::::<><><>0<>0<><>::
 ::res://nakama/::1758642562
 docker-compose.yml::TextFile::-1::1754697324::0::1::::<><><>0<>0<><>::
 ::res://nakama/data/::1758842566
 config.yml::TextFile::-1::1758642547::0::1::::<><><>0<>0<><>::
-::res://nakama/data/modules/::1758643616
+::res://nakama/data/modules/::1758995727

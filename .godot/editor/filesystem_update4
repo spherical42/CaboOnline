@@ -1,1 +1,4 @@
-res://main/menus/login.tscn
+res://main/games/solo.tscn
+res://main/games/solo.gd
+res://main/cardstuff/card.tscn
+res://main/cardstuff/card.gd

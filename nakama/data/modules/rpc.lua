@@ -16,7 +16,7 @@ local function create_match(_, payload)
         name = json.nm
     }
 
-    local match_id = nk.match_create("2player", params)
+    local match_id = nk.match_create("game1", params)
 
     return match_id
 end
