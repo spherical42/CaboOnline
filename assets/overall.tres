@@ -1,0 +1,33 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bikx7y4k6rcve"]
+
+[ext_resource type="FontFile" uid="uid://bs2rt3jqn6t2c" path="res://assets/fonts/Raleway-ExtraBold.ttf" id="1_cuaq0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cuaq0"]
+bg_color = Color(0.44073242, 0.28342193, 0.2726606, 1)
+
+[resource]
+resource_name = "overall"
+Button/colors/font_color = Color(0.86, 0.67868334, 0.387, 1)
+Button/colors/font_focus_color = Color(0.86, 0.67868334, 0.387, 1)
+Button/colors/font_hover_color = Color(0.86, 0.7676934, 0.61920005, 1)
+Button/colors/font_hover_pressed_color = Color(0.86, 0.67868334, 0.387, 1)
+Button/colors/font_outline_color = Color(0.66, 0.44616002, 0.1254, 1)
+Button/colors/font_pressed_color = Color(0.86, 0.67868334, 0.387, 1)
+Button/constants/outline_size = 5
+Button/fonts/font = ExtResource("1_cuaq0")
+Button/styles/normal = SubResource("StyleBoxFlat_cuaq0")
+Label/colors/font_color = Color(0.86, 0.71165, 0.47300002, 1)
+Label/colors/font_outline_color = Color(0.66, 0.44616002, 0.1254, 1)
+Label/constants/outline_size = 5
+Label/fonts/font = ExtResource("1_cuaq0")
+LineEdit/colors/font_color = Color(0.86, 0.67868334, 0.387, 1)
+LineEdit/colors/font_outline_color = Color(0.66, 0.44616002, 0.1254, 1)
+LineEdit/colors/font_placeholder_color = Color(0.86, 0.67868334, 0.387, 0.39215687)
+LineEdit/colors/font_selected_color = Color(0.86, 0.67868334, 0.387, 1)
+LineEdit/constants/outline_size = 5
+LineEdit/fonts/font = ExtResource("1_cuaq0")
+TextEdit/colors/font_color = Color(0.86, 0.67868334, 0.387, 1)
+TextEdit/colors/font_outline_color = Color(0.66, 0.44616002, 0.1254, 1)
+TextEdit/colors/font_placeholder_color = Color(0.86, 0.67868334, 0.387, 0.39215687)
+TextEdit/constants/outline_size = 5
+TextEdit/fonts/font = ExtResource("1_cuaq0")
