@@ -1,3 +1,8 @@
 res://main/menus/login.tscn
 res://main/menus/overall.tres
 res://main/menus/onlinemenu.tscn
+res://main/autoload/Connection.gd
+res://main/cardstuff/card.gd
+res://main/games/solo.gd
+res://main/menus/login.gd
+res://main/cardstuff/card.tscn
