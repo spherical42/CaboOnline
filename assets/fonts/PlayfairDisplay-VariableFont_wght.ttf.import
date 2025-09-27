@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://djlkdoibgw8w2"
-path="res://.godot/imported/font.ttf-39b250d5b3aa0fc62f2ec61dd6a2edd2.fontdata"
+uid="uid://bmbjmw7pnquxk"
+path="res://.godot/imported/PlayfairDisplay-VariableFont_wght.ttf-fbc765a7962e1c71b0eb2c53d6eb2a10.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/font.ttf"
-dest_files=["res://.godot/imported/font.ttf-39b250d5b3aa0fc62f2ec61dd6a2edd2.fontdata"]
+source_file="res://assets/fonts/PlayfairDisplay-VariableFont_wght.ttf"
+dest_files=["res://.godot/imported/PlayfairDisplay-VariableFont_wght.ttf-fbc765a7962e1c71b0eb2c53d6eb2a10.fontdata"]
 
 [params]
 
@@ -23,7 +23,7 @@ allow_system_fallback=true
 force_autohinter=false
 modulate_color_glyphs=false
 hinting=1
-subpixel_positioning=1
+subpixel_positioning=4
 keep_rounding_remainders=true
 oversampling=0.0
 Fallbacks=null

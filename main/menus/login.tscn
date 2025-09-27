@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bv2bx7m6rxjri"]
+[gd_scene load_steps=4 format=3 uid="uid://bv2bx7m6rxjri"]
 
 [ext_resource type="Script" uid="uid://qomq0c3238kc" path="res://main/menus/login.gd" id="1_13yus"]
+[ext_resource type="Theme" uid="uid://bikx7y4k6rcve" path="res://main/menus/overall.tres" id="2_cm1sm"]
+[ext_resource type="FontFile" uid="uid://bmbjmw7pnquxk" path="res://assets/fonts/PlayfairDisplay-VariableFont_wght.ttf" id="3_kt7ok"]
 
 [node name="Login" type="Control"]
 layout_mode = 3
@@ -9,10 +11,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_cm1sm")
 script = ExtResource("1_13yus")
 
 [node name="start" type="VBoxContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -25,8 +27,10 @@ offset_right = 88.0
 offset_bottom = 84.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_cm1sm")
 theme_override_constants/separation = 24
 alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="login" type="Button" parent="start"]
 layout_mode = 2
@@ -36,7 +40,29 @@ text = "online play"
 layout_mode = 2
 text = "solo play"
 
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5069444
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.49691358
+offset_left = -136.0
+offset_top = -220.0
+offset_right = 138.0
+offset_bottom = -83.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.86, 0.67868334, 0.387, 0.39215687)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("3_kt7ok")
+theme_override_font_sizes/font_size = 100
+text = "CABO"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
 [node name="credentials" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -45,6 +71,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_cm1sm")
 
 [node name="uname" type="TextEdit" parent="credentials"]
 layout_mode = 0
@@ -52,6 +79,7 @@ offset_left = -112.0
 offset_top = -48.0
 offset_right = 112.0
 offset_bottom = -16.0
+theme = ExtResource("2_cm1sm")
 placeholder_text = "USERNAME"
 
 [node name="pword" type="TextEdit" parent="credentials"]
@@ -60,6 +88,7 @@ offset_left = -112.0
 offset_top = 16.0
 offset_right = 112.0
 offset_bottom = 48.0
+theme = ExtResource("2_cm1sm")
 placeholder_text = "PASSWORD"
 
 [node name="confirm" type="Button" parent="credentials"]
@@ -68,6 +97,7 @@ offset_left = -64.0
 offset_top = 80.0
 offset_right = 64.0
 offset_bottom = 112.0
+theme = ExtResource("2_cm1sm")
 text = "login"
 
 [node name="back" type="Button" parent="credentials"]
@@ -76,6 +106,7 @@ offset_left = 128.0
 offset_top = 80.0
 offset_right = 256.0
 offset_bottom = 112.0
+theme = ExtResource("2_cm1sm")
 text = "back"
 
 [node name="errtext" type="Label" parent="."]
