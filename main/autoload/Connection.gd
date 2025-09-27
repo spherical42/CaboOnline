@@ -18,6 +18,10 @@ var _presences := {}
 
 var username
 
+var gametype = 4
+var numbots = 1
+var botdiff = 0
+
 enum OpCode {
 	JoinUpdate = 0
 }

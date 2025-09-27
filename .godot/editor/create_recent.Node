@@ -1,14 +1,14 @@
+Button
+Label
+OptionButton
+Control
 Panel
 HBoxContainer
 VBoxContainer
-Label
 MarginContainer
 ColorRect
 PanelContainer
-Control
 Container
 HFlowContainer
-Button
-OptionButton
 Node2D
 Label      - Matches the "text" keyword.

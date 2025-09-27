@@ -2,3 +2,9 @@ res://main/games/solo.tscn
 res://main/games/solo.gd
 res://main/cardstuff/card.tscn
 res://main/cardstuff/card.gd
+res://main/cardstuff/hand.tscn
+res://main/menus/solomenu.tscn
+res://main/menus/solomenu.gd
+res://main/menus/login.gd
+res://main/menus/login.tscn
+res://main/autoload/Connection.gd

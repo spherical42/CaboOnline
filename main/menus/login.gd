@@ -54,3 +54,7 @@ func conncect_to_server() -> int:
 		print("could not connect")
 		
 	return result
+
+
+func _on_singleplayer_button_up() -> void:
+	get_tree().change_scene_to_file("res://main/menus/solomenu.tscn")
