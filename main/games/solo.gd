@@ -151,13 +151,13 @@ func refreshall():
 		for i in range(hands[x].top.size()):
 			var curcard = card.instantiate()
 			curcard.val = hands[x].top[i]
-			curcard.owner = x
+			curcard.ownerhand = x
 			get_node(str(x)+"/top").add_child(curcard)
 		
 		for i in range(hands[x].bot.size()):
 			var curcard = card.instantiate()
 			curcard.val = hands[x].bot[i]
-			curcard.owner = x
+			curcard.ownerhand = x
 			curcard.row = "bot"
 			curcard.entered.connect(self.cardenter)
 			curcard.exited.connect(self.cardexit)
@@ -172,7 +172,7 @@ func refreshhand(h):
 	for i in range(hands[h].top.size()):
 		var curcard = card.instantiate()
 		curcard.val = hands[h].top[i]
-		curcard.owner = h
+		curcard.ownerhand = h
 		curcard.entered.connect(self.cardenter)
 		curcard.exited.connect(self.cardexit)
 		get_node(str(h)+"/top").add_child(curcard)
@@ -180,7 +180,7 @@ func refreshhand(h):
 	for i in range(hands[h].bot.size()):
 		var curcard = card.instantiate()
 		curcard.val = hands[h].bot[i]
-		curcard.owner = h
+		curcard.ownerhand = h
 		curcard.row = "bot"
 		curcard.entered.connect(self.cardenter)
 		curcard.exited.connect(self.cardexit)
