@@ -57,4 +57,5 @@ func conncect_to_server() -> int:
 
 
 func _on_singleplayer_button_up() -> void:
-	get_tree().change_scene_to_file("res://main/menus/solomenu.tscn")
+	#go to solo gamne
+	pass

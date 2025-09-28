@@ -1,6 +1,30 @@
-[gd_scene load_steps=2 format=3 uid="uid://bv2bx7m6rxjri"]
+[gd_scene load_steps=9 format=3 uid="uid://bv2bx7m6rxjri"]
 
 [ext_resource type="Script" uid="uid://qomq0c3238kc" path="res://main/menus/login.gd" id="1_13yus"]
+[ext_resource type="Texture2D" uid="uid://dogljh36d6x71" path="res://assets/img/pattern.png" id="2_0gd4c"]
+[ext_resource type="FontFile" uid="uid://bmbjmw7pnquxk" path="res://assets/fonts/PlayfairDisplay-VariableFont_wght.ttf" id="2_kt7ok"]
+[ext_resource type="Theme" uid="uid://bikx7y4k6rcve" path="res://assets/overall.tres" id="3_0gd4c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13yus"]
+bg_color = Color(0.4, 0.252, 0.25446662, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kt7ok"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0.83, 0.74783003, 0.55609995, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0gd4c"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.83137256, 0.7490196, 0.5568628, 1)
+
+[sub_resource type="Theme" id="Theme_g8076"]
 
 [node name="Login" type="Control"]
 layout_mode = 3
@@ -10,6 +34,84 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_13yus")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="background" type="Panel" parent="Control"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_13yus")
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+modulate = Color(1, 1, 1, 0.11764706)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_0gd4c")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="edgeborder" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kt7ok")
+
+[node name="edgebordersmaller" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_right = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0gd4c")
+
+[node name="edgebordersmaller2" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 40.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0gd4c")
+
+[node name="cabolabel" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 80.0
+offset_bottom = -433.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.85882354, 0.76862746, 0.61960787, 1)
+theme_override_colors/font_outline_color = Color(0.73, 0.55115, 0.42340004, 1)
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = ExtResource("2_kt7ok")
+theme_override_font_sizes/font_size = 100
+text = "CABO"
+horizontal_alignment = 1
 
 [node name="start" type="VBoxContainer" parent="."]
 visible = false
@@ -25,16 +127,19 @@ offset_right = 88.0
 offset_bottom = 84.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 24
+theme = SubResource("Theme_g8076")
+theme_override_constants/separation = 40
 alignment = 1
 
 [node name="login" type="Button" parent="start"]
 layout_mode = 2
-text = "online play"
+theme = ExtResource("3_0gd4c")
+text = "Online"
 
 [node name="singleplayer" type="Button" parent="start"]
 layout_mode = 2
-text = "solo play"
+theme = ExtResource("3_0gd4c")
+text = "Solo"
 
 [node name="credentials" type="Control" parent="."]
 layout_mode = 1
@@ -49,33 +154,37 @@ grow_vertical = 2
 [node name="uname" type="TextEdit" parent="credentials"]
 layout_mode = 0
 offset_left = -112.0
-offset_top = -48.0
+offset_top = -44.0
 offset_right = 112.0
-offset_bottom = -16.0
+offset_bottom = -12.0
+theme = ExtResource("3_0gd4c")
 placeholder_text = "USERNAME"
 
 [node name="pword" type="TextEdit" parent="credentials"]
 layout_mode = 0
 offset_left = -112.0
-offset_top = 16.0
+offset_top = 4.0
 offset_right = 112.0
-offset_bottom = 48.0
+offset_bottom = 36.0
+theme = ExtResource("3_0gd4c")
 placeholder_text = "PASSWORD"
 
 [node name="confirm" type="Button" parent="credentials"]
 layout_mode = 0
-offset_left = -64.0
-offset_top = 80.0
-offset_right = 64.0
-offset_bottom = 112.0
+offset_left = 16.0
+offset_top = 76.0
+offset_right = 144.0
+offset_bottom = 110.0
+theme = ExtResource("3_0gd4c")
 text = "login"
 
 [node name="back" type="Button" parent="credentials"]
 layout_mode = 0
-offset_left = 128.0
-offset_top = 80.0
-offset_right = 256.0
-offset_bottom = 112.0
+offset_left = -144.0
+offset_top = 76.0
+offset_right = -16.0
+offset_bottom = 110.0
+theme = ExtResource("3_0gd4c")
 text = "back"
 
 [node name="errtext" type="Label" parent="."]
