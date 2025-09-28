@@ -4,21 +4,32 @@ var up := false :
 	set(n): 
 		up = n
 		set_up()
-var pos = Vector2(0, 0)
 var ownerhand = ""
+var row = "top"
 
-signal entered()
+var rows = {
+	bot = 0,
+	top = 1
+}
+
+signal entered(h, r, p)
+signal exited()
+
 
 func _ready() -> void:
 	$back.visible = !up
 	$MarginContainer/contents/valuetxt.text = str(val)
 
 func _on_mouse_entered() -> void:
-	pass # Replace with function body.
+	var r = rows.row
+	var p = get_parent().get_children().find(self)
+	entered.emit(ownerhand, r, p)
 
 
 func _on_mouse_exited() -> void:
-	pass # Replace with function body.
+	
+	exited.emit()
+
 
 func set_up():
 	$back.visible = !up
