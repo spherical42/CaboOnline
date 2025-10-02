@@ -26,11 +26,38 @@ local generate_deck = function(dList)
             table.insert(deck, k) --appends to deck array
         end
     end
-
     return deck
 end
 
-local reshuffle = function(deck, discard)
+local draw = function(state)
+    return table.remove(state.deck) -- pops back of deck
+end
+
+local discard = function(card, state)
+    table.insert(state.discard, card) -- puts value on top of discard pile
+end
+
+local deal_hand = function(num, state)
+    local hand = { {}, {} }
+    local rowsize = num / 2
+    for i in hand do
+        for j = 0, rowsize - 1 do
+            hand[i][j] = draw(state)
+        end
+    end
+    return hand
+end
+
+local get_hand_lengths = function(hand)
+    local row_lengths = {}
+    for x in hand do
+        table.insert(row_lengths, #x)
+    end
+    return row_lengths -- returns lengths of rows in the hand
+end
+
+
+local reshuffle = function(state)
 
 end
 
@@ -51,30 +78,48 @@ local GameStateCodes = {
 }
 
 local OpCodes = {
-
+    join = 0,
+    sendbottrow = 1,
+    reveal = 2
 }
 
 local PlayerStateCodes = {
-    neutral = 0,   -- not their turn
-    drawncard = 1, -- apon drawing a card
-    postdraw = 2,  -- after they have done something with the drawn card on their turn and have no ability
-    peekself = 3,  -- after discarding a 7 or 8
-    peekother = 4, -- after discarding a 9 or 10
-    forceswap = 5, -- after discarding a non-king face card
-    optionswap = 6 -- after discarding a king
+    preready = 0,   -- after joining the game and before they ready
+    neutral = 1,    -- not their turn
+    drawncard = 2,  -- apon drawing a card
+    peekself = 3,   -- after discarding a 7 or 8
+    peekother = 4,  -- after discarding a 9 or 10
+    forceswap = 5,  -- after discarding a non-king face card
+    optionswap = 6, -- after discarding a king
+    endphase = 7    -- after having done all turn-exclusive actions
 }
 
 local ActionCodes = {
-
+    add = 0,
+    replace = 1, -- only for drawn card and own card
+    swap = 2,    -- used for both forced and optional
+    discard = 3, -- only for drawn card
+    peek = 4,    -- used for both own and other
+    ready = 5,   -- used after viewing own cards at the beginning of the game
+    endturn = 6, -- used to advance turn order
+    cabo = 7     -- call cabo
 }
 
 local EligableActions = {
-
+    [PlayerStateCodes.preready] = { ActionCodes.ready },
+    [PlayerStateCodes.neutral] = { ActionCodes.add },
+    [PlayerStateCodes.drawncard] = { ActionCodes.discard, ActionCodes.replace, ActionCodes.add },
+    [PlayerStateCodes.peekself] = { ActionCodes.peek, ActionCodes.add, ActionCodes.endturn, ActionCodes.cabo },
+    [PlayerStateCodes.peekother] = { ActionCodes.peek, ActionCodes.add, ActionCodes.endturn, ActionCodes.cabo },
+    [PlayerStateCodes.forceswap] = { ActionCodes.swap, ActionCodes.add },
+    [PlayerStateCodes.optionswap] = { ActionCodes.swap, ActionCodes.add, ActionCodes.endturn, ActionCodes.cabo },
+    [PlayerStateCodes.endphase] = { ActionCodes.add, ActionCodes.endturn, ActionCodes.cabo }
 }
 
 function M.match_init(_, params)
     local state = {                     -- initialize match state
         name = params.name,
+        dealsize = params.numcards,     -- number of cards dealt to players when they join
         presences = {},                 -- nakama presences
         names = {},                     -- usernames
         deck = generate_deck(deckList), -- end of array is top of the deck
@@ -111,4 +156,35 @@ function M.match_join_attempt(context, dispatcher, tick, state, presence, metada
     end
 
     return state, true
+end
+
+function M.match_join(context, dispatcher, tick, state, presences)
+    for _, presence in ipairs(presences) do -- initialize the new player
+        state.presences[presence.user_id] = presence
+        state.names[presence.user_id] = presence.username
+        state.hands[presence.user_id] = deal_hand(state.dealsize)
+        state.addboxes[presence.user_id] = {}
+        state.pstates[presence.user_id] = PlayerStateCodes.preready
+        local data = { -- data to broadcast to everybody
+            ["id"] = presence.user_id,
+            ["name"] = presence.username,
+            ["handdim"] = get_hand_lengths(state.hands[presence.user_id]) -- gets an array of {toprowlength, bottomrolength}
+        }
+        local encoded = nk.json_encode(data)
+        dispatcher.broadcast_message(OpCodes.join, encoded)
+        local hdata = {
+            ["bottrow"] = state.hands[presence.user_id][0]
+        }
+        local hencoded = nk.json_encode(hdata)
+        dispatcher.broadcast_message(OpCodes.sendbottrow, hencoded, { presence }) -- sends just bottom row values with opcode to reaveal those cards
+    end
+
+    return state
+end
+
+function M.match_leave(context, dispatcher, tick, state, presences)
+    for _, presence in ipairs(presences) do
+
+    end
+    return state
 end
