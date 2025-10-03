@@ -1,5 +1,6 @@
 local M = {}
 local nk = require("nakama")
+math.randomseed(os.time())
 
 local deckList = {
     [-1] = 2,
@@ -29,17 +30,36 @@ local generate_deck = function(dList)
     return deck
 end
 
+
+local reshuffle = function(state)             -- simply reshuffle the discard pile into the deck while keeping the top card
+    local wazoo = table.remove(state.discard) -- preseverves the top card
+    local len = #state.deck
+    for i = 1, #state.discard do              -- add discard to deck
+        state.deck[len + i] = state.discard[i]
+    end
+    state.discard = { wazoo }     -- set only card in discard to be previous wazoo
+    for i = #state.deck, 2, -1 do -- shuffle
+        local j = math.random(i)
+        state.deck[i], state.deck[j] = state.deck[j], state.deck[i]
+    end
+end
+
 local draw = function(state)
-    return table.remove(state.deck) -- pops back of deck
+    if #state.deck > 1 then
+        return table.remove(state.deck) -- pops back of deck
+    else
+        reshuffle(state)
+        return table.remove(state.deck)
+    end
 end
 
 local discard = function(card, state)
     table.insert(state.discard, card) -- puts value on top of discard pile
 end
 
-local deal_hand = function(num, state)
+local deal_hand = function(state) -- returns a dealt hand from the deck based on hand size
     local hand = { {}, {} }
-    local rowsize = num / 2
+    local rowsize = state.dealsize / 2
     for i in hand do
         for j = 0, rowsize - 1 do
             hand[i][j] = draw(state)
@@ -48,30 +68,27 @@ local deal_hand = function(num, state)
     return hand
 end
 
-local get_hand_lengths = function(hand)
+local get_hand_lengths = function(hand) -- use this to send hand size for to show facedowns
     local row_lengths = {}
-    for x in hand do
+    for x in hand do                    -- for each row
         table.insert(row_lengths, #x)
     end
     return row_lengths -- returns lengths of rows in the hand
 end
 
 
-local reshuffle = function(state)
-
-end
 
 local can_add = function(addingbox, wazoo) -- adding box must have at least 1 element
     -- make it so that when you call this function for a normal flip you make the one card you are flipping the only card in addingbox
     if #addingbox == 1 then
-        return addingbox[0][-1] == wazoo                    -- returns true or false for normal flip
+        return addingbox[1] == wazoo                -- returns true or false for normal flip
     else
-        return addingbox[0][-1] + addingbox[1][-1] == wazoo -- returns true or false for add
+        return addingbox[1] + addingbox[2] == wazoo -- returns true or false for add
     end
-    return false                                            -- should never run but just in case
+    return false                                    -- should never run but just in case
 end
 
-local GameStateCodes = {
+local GameStateCodes = { -- determines if people can join and if actions are acted on
     created = 0,
     playing = 1,
     endscreen = 2
@@ -79,8 +96,9 @@ local GameStateCodes = {
 
 local OpCodes = {
     join = 0,
-    sendbottrow = 1,
-    reveal = 2
+    leave = 1,
+    sendbottrow = 2,
+    reveal = 3
 }
 
 local PlayerStateCodes = {
@@ -173,7 +191,7 @@ function M.match_join(context, dispatcher, tick, state, presences)
         local encoded = nk.json_encode(data)
         dispatcher.broadcast_message(OpCodes.join, encoded)
         local hdata = {
-            ["bottrow"] = state.hands[presence.user_id][0]
+            ["bottrow"] = state.hands[presence.user_id][1]
         }
         local hencoded = nk.json_encode(hdata)
         dispatcher.broadcast_message(OpCodes.sendbottrow, hencoded, { presence }) -- sends just bottom row values with opcode to reaveal those cards
@@ -184,7 +202,27 @@ end
 
 function M.match_leave(context, dispatcher, tick, state, presences)
     for _, presence in ipairs(presences) do
+        local id = presence.user_id             -- hold these while we remove them from the state
+        local name = presence.username
+        state.presences[presence.user_id] = nil -- clean up their stuff
+        state.names[presence.user_id] = nil
+        state.addboxes[presence.user_id] = nil
+        state.pstates[presence.user_id] = nil
 
+        for row in state.hands[presence.user_id] do -- add their entire hand to the bottom (front) of the discard pile
+            for card in row do
+                table.insert(state.discard, 1, card)
+            end
+        end
+
+        state.hands[presence.user_id] = nil -- then remove their hand
+
+        local data = {
+            ["id"] = id,
+            ["name"] = name
+        }
+        local encoded = nk.json_encode(data)
+        dispatcher.broadcast_message(OpCodes.leave, encoded) -- send data of who left
     end
     return state
 end
